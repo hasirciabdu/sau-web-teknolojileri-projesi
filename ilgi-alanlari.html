@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İlgi Alanlarım: Diziler - Web Teknolojileri Projesi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+    <header class="bg-dark text-white text-center py-5 shadow">
+        <div class="container">
+            <h1 class="display-4">Dizi / Film Keşfi</h1>
+            <p class="lead">Dizi ve Film Arama Motoru</p>
+        </div>
+    </header>
+
+<main class="container my-5 flex-grow-1">        
+        <section class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <div class="card shadow-sm p-4 border-0">
+                    <h4 class="mb-3 text-primary">Sevdiğiniz Diziyi Arayın</h4>
+                    <div class="input-group input-group-lg">
+                        <input type="text" id="aramaKutusu" class="form-control" placeholder="Örn: Breaking Bad, Batman, Office...">
+                        <button class="btn btn-primary px-4" onclick="diziAra()">Ara</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="row" id="sonucAlani">
+            </section>
+
+    </main>
+
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p class="mb-0"> 2026 Web Teknolojileri Projesi | Abdulrahman Hasırcı</p>
+    </footer>
+
+    <script>
+        function diziAra() {
+            // Kullanıcının yazdığı kelimeyi al
+            const kelime = document.getElementById('aramaKutusu').value;
+            const sonucAlani = document.getElementById('sonucAlani');
+
+            // Kutu boşsa uyarı ver
+            if (kelime === "") {
+                alert("Lütfen aramak için bir dizi veya film adı yazın.");
+                return;
+            }
+
+            // Arama yaparken kullanıcıya "Yükleniyor" mesajı göster
+            sonucAlani.innerHTML = "<div class='col-12 text-center'><div class='spinner-border text-primary' role='status'></div><p>Veriler aranıyor...</p></div>";
+
+            // TVMaze API'sine bağlan (Ücretsiz ve key gerektirmez)
+            fetch(`https://api.tvmaze.com/search/shows?q=${kelime}`)
+                .then(cevap => cevap.json()) // Gelen veriyi JSON formatına çevir
+                .then(veriler => {
+                    // Ekranı temizle
+                    sonucAlani.innerHTML = "";
+
+                    // Eğer sonuç bulunamadıysa
+                    if (veriler.length === 0) {
+                        sonucAlani.innerHTML = "<div class='col-12 text-center text-danger'><h5>Aradığınız kriterde dizi bulunamadı.</h5></div>";
+                        return;
+                    }
+
+                    // Gelen her bir dizi verisi için döngü oluştur ve Bootstrap Card içine yerleştir
+                    veriler.forEach(veri => {
+                        let dizi = veri.show;
+                        // Eğer dizinin resmi yoksa yedek bir görsel koy
+                        let resim = dizi.image ? dizi.image.medium : 'https://via.placeholder.com/210x295?text=Afiş+Yok';
+                        let puan = dizi.rating.average ? dizi.rating.average + " / 10" : "Puan Yok";
+
+                        let kartHTML = `
+                            <div class="col-md-3 mb-4">
+                                <div class="card h-100 shadow-sm border-0">
+                                    <img src="${resim}" class="card-img-top" alt="${dizi.name}" style="height: 350px; object-fit: cover;">
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title text-primary">${dizi.name}</h5>
+                                        <p class="card-text"><strong>IMDb Puanı:</strong> ${puan}</p>
+                                        <p class="card-text small text-muted">Tür: ${dizi.genres.join(", ") || "Bilinmiyor"}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        // Oluşturulan kartı sayfaya ekle
+                        sonucAlani.innerHTML += kartHTML;
+                    });
+                })
+                .catch(hata => {
+                    // İnternet kopması vb. durumlar için hata kontrolü
+                    console.error("API Hatası:", hata);
+                    sonucAlani.innerHTML = "<div class='col-12 text-center text-danger'><h5>Veri çekilirken bir hata oluştu.</h5></div>";
+                });
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
