@@ -9,6 +9,25 @@
 </head>
 <body class="bg-light d-flex flex-column min-vh-100">
 
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">Abdulrahman Hasırcı</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Hakkında</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cv.html">Özgeçmiş</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sehir.html">Şehrim</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ilgi-alanlari.html">Dizi / Film Arama</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="iletisim.html">İletişim</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary btn-sm text-white ms-lg-3 px-3" href="login.html">Giriş Yap</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <header class="bg-dark text-white text-center py-5 shadow">
         <div class="container">
             <h1 class="display-4">İletişim Formu</h1>
@@ -23,26 +42,24 @@
                 <div class="card shadow border-0 p-4 p-md-5">
                     <h3 class="mb-4 text-primary border-bottom pb-2">İletişim Formu</h3>
                     
-                    <div id="hataKutusu" class="alert alert-danger d-none" role="alert">
-    
-                    </div>
+                    <div id="hataKutusu" class="alert alert-danger d-none" role="alert"></div>
                     
-                    <form action="#" method="POST" onsubmit="return formKontrol()">                        
+                    <form id="app" action="#" method="POST">                        
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="ad" class="form-label">Adınız</label>
-                                <input type="text" class="form-control" id="ad" placeholder="Örn: Abdulrahman">
+                                <input type="text" class="form-control" id="ad" v-model="ad" placeholder="Örn: Abdulrahman">
                             </div>
                             <div class="col-md-6 mt-3 mt-md-0">
                                 <label for="soyad" class="form-label">Soyadınız</label>
-                                <input type="text" class="form-control" id="soyad" placeholder="Örn: Hasırcı">
+                                <input type="text" class="form-control" id="soyad" v-model="soyad" placeholder="Örn: Hasırcı">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="email" class="form-label">E-posta Adresiniz</label>
-                                <input type="email" class="form-control" id="email" placeholder="ornek@sakarya.edu.tr">
+                                <input type="email" class="form-control" id="email" v-model="email" placeholder="ornek@sakarya.edu.tr">
                             </div>
                             <div class="col-md-6 mt-3 mt-md-0">
                                 <label for="telefon" class="form-label">Telefon Numaranız</label>
@@ -86,61 +103,89 @@
 
                         <div class="mb-4">
                             <label for="mesaj" class="form-label">Mesajınız</label>
-                            <textarea class="form-control" id="mesaj" rows="5" placeholder="Lütfen mesajınızı buraya yazın..."></textarea>
+                            <textarea class="form-control" id="mesaj" v-model="mesaj" rows="5" placeholder="Lütfen mesajınızı buraya yazın..."></textarea>
                         </div>
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button type="reset" class="btn btn-outline-secondary me-md-2">Formu Temizle</button>
-                            <button type="submit" class="btn btn-primary px-5">Gönder</button>
+                        <button type="reset" class="btn btn-outline-secondary me-md-2">Formu Temizle</button>
+    
+                        <button type="button" class="btn btn-warning px-4" onclick="jsIleGonder()">JS ile Gönder</button>
+    
+                        <button type="button" class="btn btn-success px-4" @click="vueIleGonder">Vue ile Gönder</button>
                         </div>
 
                     </form>
-                    </div>
+                </div>
             </div>
         </section>
 
     </main>
 
     <footer class="bg-dark text-white text-center py-3 mt-5">
-        <p class="mb-0">&copy; 2026 Web Teknolojileri Projesi | Abdulrahman Hasırcı</p>
+        <p class="mb-0">2026 Web Teknolojileri Projesi | Abdulrahman Hasırcı</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
-        function formKontrol() {
-            // Formdaki kutuların içindeki değerleri alalım
+        function jsIleGonder() {
             let ad = document.getElementById('ad').value.trim();
             let soyad = document.getElementById('soyad').value.trim();
             let email = document.getElementById('email').value.trim();
             let mesaj = document.getElementById('mesaj').value.trim();
             let hataKutusu = document.getElementById('hataKutusu');
 
-            // 1. KURAL: Ad veya Soyad boş bırakılamaz
             if (ad === "" || soyad === "") {
-                hataKutusu.innerHTML = "<strong>Hata!</strong> Lütfen ad ve soyad alanlarını doldurunuz.";
-                hataKutusu.classList.remove('d-none'); // Hata kutusunu görünür yap
-                return false; // Formun gönderilmesini durdur
+                hataKutusu.innerHTML = "<strong>JS Hatası!</strong> Lütfen ad ve soyad alanlarını doldurunuz.";
+                hataKutusu.classList.remove('d-none');
+                return; 
             }
 
-            // 2. KURAL: E-posta formatı doğru olmalı (İçinde @ ve . olmalı)
             let emailFormati = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!email.match(emailFormati)) {
-                hataKutusu.innerHTML = "<strong>Hata!</strong> Lütfen geçerli bir e-posta adresi giriniz.";
+                hataKutusu.innerHTML = "<strong>JS Hatası!</strong> Lütfen geçerli bir e-posta adresi giriniz.";
                 hataKutusu.classList.remove('d-none');
-                return false;
+                return;
             }
 
-            // 3. KURAL: Mesaj alanı boş olamaz
             if (mesaj === "") {
-                hataKutusu.innerHTML = "<strong>Hata!</strong> Lütfen bana iletmek istediğiniz mesajı yazınız.";
+                hataKutusu.innerHTML = "<strong>JS Hatası!</strong> Lütfen mesajınızı yazınız.";
                 hataKutusu.classList.remove('d-none');
-                return false;
+                return;
             }
 
-            // Eğer hiçbir kurala takılmadıysa form başarıyla gönderilir
-            hataKutusu.classList.add('d-none'); // Hata kutusunu gizle
-            return true;
+            // Hata yoksa formu gönder
+            hataKutusu.classList.add('d-none');
+            alert("Native JS Kontrolü Başarılı! Form gönderiliyor...");
+            document.getElementById('app').submit();
         }
+    </script>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    ad: '',
+                    soyad: '',
+                    email: '',
+                    mesaj: ''
+                }
+            },
+            methods: {
+                vueIleGonder() {
+                    // Vue.js üzerinden kontrol
+                    if (!this.ad || !this.soyad || !this.email || !this.mesaj) {
+                        alert("Vue.js Uyarısı: Lütfen Ad, Soyad, E-posta ve Mesaj alanlarını doldurunuz!");
+                    } else {
+                        alert("Vue.js Kontrolü Başarılı! Form gönderiliyor...");
+                        document.getElementById('app').submit();
+                    }
+                }
+            }
+        }).mount('#app');
     </script>
 </body>
 </html>
