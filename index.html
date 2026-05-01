@@ -1,31 +1,166 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hakkında - Web Teknolojileri Projesi</title>
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
-    <div class="container">
-        <a class="navbar-brand fw-bold" href="index.html">Abdulrahman Hasırcı</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ana Sayfa - Abdulrahman Hasırcı</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="bg-light d-flex flex-column min-vh-100">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html"
+          >Abdulrahman Hasırcı</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="index.html">Hakkında</a></li>
-                <li class="nav-item"><a class="nav-link" href="cv.html">Özgeçmiş</a></li>
-                <li class="nav-item"><a class="nav-link" href="sehir.html">Şehrim</a></li>
-                <li class="nav-item"><a class="nav-link" href="ilgi-alanlari.html">Dizi / Film Arama</a></li>
-                <li class="nav-item"><a class="nav-link" href="iletisim.html">İletişim</a></li>
-                <li class="nav-item"><a class="nav-link btn btn-primary btn-sm text-white ms-lg-3 px-3" href="login.html">Giriş Yap</a></li>
-            </ul>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html">Hakkında</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cv.html">Özgeçmiş</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="sehir.html">Şehrim</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ilgi-alanlari.html"
+                >Dizi / Film Arama</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="iletisim.html">İletişim</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link btn btn-primary btn-sm text-white ms-lg-3 px-3"
+                href="login.html"
+                >Giriş Yap</a
+              >
+            </li>
+          </ul>
         </div>
-    </div>
-</nav>
+      </div>
+    </nav>
 
+    <!-- KAHRAMAN BÖLÜMÜ (Hero Section) -->
+    <header class="bg-primary text-white text-center py-5 shadow-sm">
+      <div class="container py-4">
+        <h1 class="display-4 fw-bold">Merhaba, Ben Abdulrahman!</h1>
+        <p class="lead mt-3">
+          Sakarya Üniversitesi Bilgisayar Mühendisliği Öğrencisi | Geliştirici &
+          Dijital İçerik Üreticisi
+        </p>
+        <a href="cv.html" class="btn btn-light btn-lg mt-3 fw-bold text-primary"
+          >Özgeçmişimi İncele</a
+        >
+        <a
+          href="iletisim.html"
+          class="btn btn-outline-light btn-lg mt-3 ms-2 fw-bold"
+          >İletişime Geç</a
+        >
+      </div>
+    </header>
 
-    <h1>Proje Başladı</h1>
-</body>
+    <!-- HAKKINDA VE HOBİLER -->
+    <main class="container my-5 flex-grow-1">
+      <div class="row align-items-center mb-5">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <h2 class="text-primary border-bottom pb-2">Hakkımda</h2>
+          <p class="mt-3">
+            Eğitimime Sakarya Üniversitesi'nde devam ediyorum. Akademik olarak
+            kendimi sürekli geliştirerek, C++ ile başladığım programlama
+            serüvenime şu an C# ve Web Teknolojileri (HTML, CSS, JavaScript) ile
+            devam ediyorum. Gelecekte yapay zeka ve makine öğrenimi alanlarında
+            da kendimi geliştirmeyi hedefliyorum.
+          </p>
+          <p>
+            Yazılımın yanı sıra yapay zeka araçlarını etkili kullanarak, büyük
+            maliyetlerle üretilen içeriklerin daha erişilebilir ve yaratıcı bir
+            şekilde ortaya çıkmasına katkıda bulunmayı amaçlıyorum.
+          </p>
+        </div>
+        <div class="col-lg-6">
+          <!-- PDF Medya Kuralı: Resim Ekleme -->
+          <img
+            src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop"
+            alt="Yazılım Geliştirme"
+            class="img-fluid rounded shadow"
+          />
+        </div>
+      </div>
+
+      <div class="row mb-5">
+        <!-- HOBİLER VE İLGİ ALANLARI -->
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <h3 class="text-primary border-bottom pb-2">
+            Hobilerim ve İlgi Alanlarım
+          </h3>
+          <ul class="list-group list-group-flush mt-3 shadow-sm rounded">
+            <li class="list-group-item bg-light">
+              🎮 <strong>Oyun Dünyası:</strong> Red Dead Redemption 2 ve
+              Detroit: Become Human gibi derin hikayeye sahip yapımları oynamak
+              ve mekaniklerini incelemek.
+            </li>
+            <li class="list-group-item bg-light">
+              🏛️ <strong>Tarih:</strong> İslam ve Osmanlı tarihi ağırlıklı genel
+              tarihi araştırmak
+            </li>
+            <li class="list-group-item bg-light">
+              🤖 <strong>Yapay Zeka:</strong> Görüntü işleme modelleri ile
+              tekstil ve sokak giyimi modasına yönelik konsept tasarımlar
+              üretmek.
+            </li>
+          </ul>
+        </div>
+
+        <!-- PDF Medya Kuralı: Video Ekleme -->
+        <div class="col-lg-6">
+          <h3 class="text-primary border-bottom pb-2">İlham Veren İçerikler</h3>
+          <div class="ratio ratio-16x9 mt-3 shadow rounded">
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/mtV_bV3Cc1g?si=2mSrx3_lHPvm2A2B"
+              title="YouTube video player"
+              frameborder="0"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+                web-share;
+              "
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white text-center py-3 mt-auto">
+      <p class="mb-0">
+        &copy; 2026 Web Teknolojileri Projesi | Abdulrahman Hasırcı
+      </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
