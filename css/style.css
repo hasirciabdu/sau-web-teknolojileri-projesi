@@ -1,0 +1,36 @@
+/* GENEL YAPI VE TİPOGRAFİ */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* NAVBAR (MENÜ) GÖLGESİ */
+.navbar {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* BUTON HOVER (ÜZERİNE GELİNCE) EFEKTLERİ */
+.btn {
+    transition: all 0.3s ease; /* Yumuşak geçiş animasyonu */
+}
+
+.btn:hover {
+    transform: translateY(-2px); /* Butonu 2 piksel yukarı kaldırır */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Hafif gölge verir */
+}
+
+/* KART TASARIMLARI İÇİN ÖZEL DOKUNUŞ */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* FOOTER (ALT BİLGİ) AYARI */
+footer {
+    border-top: 3px solid #0d6efd; /* Bootstrap primary renginde ince bir çizgi */
+}
